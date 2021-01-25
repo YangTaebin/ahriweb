@@ -26,5 +26,9 @@ def stock():
 
     return render_template("stock.html",title="아리아리 주식",ahristock=ahristock_now)
 
+@app.route('/setahristock')
+def setstock():
+    pass
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)
