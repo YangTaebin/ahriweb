@@ -1,0 +1,94 @@
+body{
+  margin: 0px;
+}
+.top-bar{
+  margin-top: 21px;
+  padding-left: 7%;
+  padding-bottom: 21px;
+  border-bottom: 1px solid black;
+}
+.topMenu ul{
+  margin: 0px;
+  padding: 0px;
+}
+.topMenu{
+  height: 30px;
+  width: 100%;
+  text-align: center;
+}
+.menuNav{
+  list-style: none;
+  color: black;
+  background-color: white;
+  float: left;
+  line-height: 30px;
+  vertical-align: center;
+  text-align: center;
+  border-left: 1px solid black;
+  display: inline;
+}
+.menuLink{
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  width: 100px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Arial;
+}
+.menuImg{
+  width: 105px;
+  height: 45px;
+}
+.menuImage{
+  margin-top: -2px;
+  margin-right: 24%;
+  list-style: none;
+  color: black;
+  background-color: white;
+  float: left;
+  line-height: 30px;
+  vertical-align: center;
+  text-align: center;
+  display: inline-block;
+}
+.menuLogin{
+  list-style: none;
+  color: black;
+  background-color: white;
+  float: left;
+  line-height: 30px;
+  vertical-align: center;
+  text-align: center;
+  display: inline;
+  margin-left: 24%
+}
+.menuLogin a{
+  font-size: 20px;
+}
+.main{
+  weight: 100%;
+  height: 900px;
+  background-size: 100% 100%;
+  background-image: url("logo/아리아리.jpg");
+  opacity: 1;
+}
+.main_intro{
+  text-shadow: 0px 0px 10px #000000;
+  margin: 0px;
+  padding-top:110px;
+  font-size: 40px;
+  opacity: 1;
+  font-weight: bold;
+  padding-left: 10%;
+  color: white;
+}
+.main_intro_add{
+  text-shadow: 0px 0px 10px #000000;
+  margin: 0px;
+  font-size: 40px;
+  opacity: 1;
+  font-weight: bold;
+  padding-left: 10%;
+  color: white;
+}
