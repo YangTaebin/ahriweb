@@ -16,11 +16,14 @@ def stock():
         db="ahriweb"
     )
     ahristock_cursor = ahristock.cursor(pymysql.cursors.DictCursor)
+
     sql="SELECT * FROM `ahristock`;"
     ahristock_cursor.execute(sql)
     ahristock_result = ahristock_cursor.fetchall()
+
     ahristock_num = len(ahristock_result)
     ahristock_now = int(ahristock_result[ahristock_num-1]['stock'])
+
     return "현재 주가 : "+str(ahristock_now)
 
 if __name__ == "__main__":
