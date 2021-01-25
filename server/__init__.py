@@ -24,7 +24,7 @@ def stock():
     ahristock_num = len(ahristock_result)
     ahristock_now = int(ahristock_result[ahristock_num-1]['stock'])
 
-    return "현재 주가 : "+str(ahristock_now)
+    return render_template("stock.html",title="아리아리 주식",ahristock=ahristock_now)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)
