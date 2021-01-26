@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+  </head>
+  <body>
+    <div class="top-bar">
+      <nav class="topMenu">
+        <ul>
+          <li class="menuImage">
+            <a href="/"><img src="{{ url_for('static', filename='logo/logo_word_black.png') }}" alt="AHRIAHRI" class="menuImg"></a>
+          </li>
+          <li class="menuNav">
+            <a href="/us" class="menuLink">About US</a>
+          </li>
+          <li class="menuNav">
+            <a href="/proj" class="menuLink">Proj</a>
+          </li>
+          <li class="menuNav">
+            <a href="/stock" class="menuLink">Stock</a>
+          </li>
+          <li class="menuNav">
+            <a href="/community" class="menuLink">Community</a>
+          </li>
+          <li class="menuLogin">
+            <a href="/login" class="menuLink">LogIn</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <form action="/stock_change" method="post">
+      <select name="jong">
+        <option value="ahri">아리아리 주식</option>
+        <option value="kosmos">코스모스 주식</option>
+      </select>
+      <input type="text" name="value" value="">
+      <input type="submit" value="변경">
+    </form>
+  </body>
+</html>
