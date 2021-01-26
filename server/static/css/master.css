@@ -63,7 +63,9 @@ body{
   vertical-align: center;
   text-align: center;
   display: inline;
-  margin-left: 24%
+  margin-left: 0%;
+  width: 200px;
+  position: fixed;
 }
 .menuLogin a{
   font-size: 20px;
