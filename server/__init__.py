@@ -54,9 +54,5 @@ def changing_p():
         ahristock.commit()
         return render_template('stock_changing.html',title="변경 완료",jong=jong,value=value)
 
-@app.route('/login')
-def login():
-    return render_template("login.html",title="로그인")
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)

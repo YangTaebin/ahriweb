@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
   </head>
   <body>
     <div class="top-bar">
@@ -25,7 +26,20 @@
             <a href="community" class="menuLink">Community</a>
           </li>
           <li class="menuLogin">
-            <a href="login" class="menuLink">LogIn</a>
+            <button style="border:0; outline: 0;" type="button" id="login_click" name="button"><img src="{{ url_for('static',filename="logo/kakao_login_medium_narrow.png") }}" alt=""></button>
+            <script type="text/javascript">
+              document.getElementById('login_click').onclick = function() {
+                Kakao.init('734a58ba8d1de6eb1485389492741493');
+                Kakao.Auth.login({
+                  success:(auth)=>{
+                    console.log("로그인 완료",auth)
+                  },
+                  fail:(err)=>{
+                    console.error(err)
+                  }
+                });
+              };
+            </script>
           </li>
         </ul>
       </nav>
