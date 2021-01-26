@@ -54,5 +54,11 @@ def changing_p():
         ahristock.commit()
         return render_template('stock_changing.html',title="변경 완료",jong=jong,value=value)
 
+@app.route('/log_res',methods=["POST"])
+def log_res():
+    id = request.form['id']
+    print(id)
+    return id
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)
