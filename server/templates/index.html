@@ -26,7 +26,7 @@
             <a href="community" class="menuLink">Community</a>
           </li>
           <li class="menuLogin">
-            <button style="border:0; outline: 0;" type="button" id="login_click" name="button"><img src="{{ url_for('static',filename="logo/kakao_login_medium_narrow.png") }}" alt=""></button>
+            <button style="border:0; outline: 0;" type="button" id="login_click" name="button"><img id="login_image" src="{{ url_for('static',filename="logo/kakao_login_medium_narrow.png") }}" alt=""></button>
             <script type="text/javascript">
               document.getElementById('login_click').onclick = function() {
                 Kakao.init('734a58ba8d1de6eb1485389492741493');
@@ -36,6 +36,18 @@
                   },
                   fail:(err)=>{
                     console.error(err)
+                  }
+                });
+                Kakao.API.request({
+                  url: '/v2/user/me',
+                  success: function(response) {
+                    console.log(response)
+                    document.getElementById('login_image').setAttribute('src',response['kakao_account']['profile']['profile_image_url']);
+                    document.getElementById('login_image').setAttribute('width',60);
+                    document.getElementById('login_image').setAttribute('height',60);
+                  },
+                  fail: function(error) {
+                    console.log(error);
                   }
                 });
               };
