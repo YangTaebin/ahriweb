@@ -53,6 +53,7 @@ body{
   vertical-align: center;
   text-align: center;
   display: inline-block;
+  position: static;
 }
 .menuLogin{
   list-style: none;
@@ -63,8 +64,8 @@ body{
   vertical-align: center;
   text-align: center;
   display: inline;
-  width: 200px;
-  position: fixed;
+  width: 250px;
+  position: relative;
 }
 .menuLogin a{
   font-size: 20px;
@@ -93,4 +94,9 @@ body{
   font-weight: bold;
   padding-left: 10%;
   color: white;
+}
+#login_click {
+  font-size: 30px;
+  color: yellow;
+  background-color: black;
 }
