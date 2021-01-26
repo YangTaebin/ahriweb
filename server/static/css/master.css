@@ -3,9 +3,9 @@ body{
 }
 .top-bar{
   overflow: hidden;
-  margin-top: 22px;
+  margin-top: 16px;
   padding-left: 7%;
-  padding-bottom: 22px;
+  padding-bottom: 4px;
   border-bottom: 1px solid black;
 }
 .topMenu ul{
@@ -65,7 +65,9 @@ body{
   text-align: center;
   display: inline;
   width: 250px;
-  position: relative;
+  position: absolute;
+  border-radius:20px 20px 20px 20px;
+  left: 1250px;
 }
 .menuLogin a{
   font-size: 20px;
@@ -96,7 +98,8 @@ body{
   color: white;
 }
 #login_click {
-  font-size: 30px;
+  font-size: 25px;
   color: yellow;
   background-color: black;
+  border-radius:20px 20px 20px 20px;
 }
