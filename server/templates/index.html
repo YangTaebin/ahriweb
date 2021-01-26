@@ -42,9 +42,14 @@
                 Kakao.API.request({
                   url: '/v2/user/me',
                   success: function(response) {
-                    console.log(response)
+                    console.log(response['id'])
                     document.getElementById('login_click').innerText = String(response['properties']['nickname'])+" 님";
                     document.getElementById('login_click').setAttribute('id','profile');
+                    $.ajax({
+                      type: 'POST',
+                      url: "/log_res",
+                      data: JSON.stringify(response['id'])
+                    });
                   },
                   fail: function(error) {
                     console.log(error);
