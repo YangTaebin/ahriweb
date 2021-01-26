@@ -110,3 +110,11 @@ body{
   color: yellow;
   transition: 0.25s;
 }
+#profile {
+  font-size: 20px;
+  color: black;
+  background-color: white;
+    border: none;
+    cursor: pointer;
+    border-radius:20px 20px 20px 20px;
+}
