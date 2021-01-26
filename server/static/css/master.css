@@ -2,6 +2,7 @@ body{
   margin: 0px;
 }
 .top-bar{
+  overflow: hidden;
   margin-top: 22px;
   padding-left: 7%;
   padding-bottom: 22px;
