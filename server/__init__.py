@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request
 import pymysql
+from sub_func import already_user
 
 app = Flask(__name__)
 
@@ -58,6 +59,28 @@ def changing_p():
 def log_res():
     id = request.form['id']
     print(id)
+
+    ahriweb_user = pymysql.connect(
+        user="root",
+        passwd="taebin0408!",
+        db="ahriweb_user",
+        host="localhost"
+    )
+    ahriweb_user_cursor = ahriweb_user.cursor(pymysql.cursors.DictCursor)
+
+    sql="SELECT * FROM `user`;"
+    ahriweb_user_cursor.execute(sql)
+    ahriweb_user_result = ahriweb_user_cursor.fetchall()
+    print(ahriweb_user_result)
+    user_num = len(ahriweb_user_result)
+
+    if not already_user(id):
+        sql = "insert into `user` (kakao_login_id,univ_id) values ("+id+","+str(user_num+1)+");"
+        ahriweb_user_cursor.execute(sql)
+        ahriweb_user.commit()
+
+    else: print("이미 등록 완료")
+
     return id
 
 if __name__ == "__main__":
