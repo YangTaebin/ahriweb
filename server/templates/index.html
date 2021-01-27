@@ -7,11 +7,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
     <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    </script>
+    <style>
+      .main_intro{
+        background-image: url("static/logo/아리아리.jpg");
+      }
+    </style>
   </head>
   <body>
     <div class="top-bar">
       <nav class="topMenu">
-        <ul>
+        <ul class="menu_ul">
           <li class="menuImage">
             <a href="#"><img src="{{ url_for('static', filename='logo/logo_word_black.png') }}" alt="AHRIAHRI" class="menuImg"></a>
           </li>
@@ -24,13 +31,14 @@
           <li class="menuNav">
             <a href="stock" class="menuLink">Stock</a>
           </li>
-          <li class="menuNav">
+          <li class="menuNav comm">
             <a href="community" class="menuLink">Community</a>
           </li>
           <li class="menuLogin">
-            <button type="button" id="login_click" name="button">Kakao Login</button>
+            <button type="button" id="login_click" name="button" onclick="login()">Kakao Login</button>
             <script type="text/javascript">
-              document.getElementById('login_click').onclick = function() {
+              function login() {
+                console.log("눌림");
                 Kakao.init('734a58ba8d1de6eb1485389492741493');
                 Kakao.Auth.login({
                   success:(auth)=>{
@@ -46,6 +54,7 @@
                     console.log(response['id'])
                     document.getElementById('login_click').innerText = String(response['properties']['nickname'])+" 님";
                     document.getElementById('login_click').setAttribute('id','profile');
+                    document.getElementById('profile').setAttribute('onclick','location.href="/profile"');
                     $.ajax({
                       type: 'POST',
                       url: "/log_res",
@@ -61,6 +70,14 @@
           </li>
         </ul>
       </nav>
+    </div>
+    <div class="main_intro">
+      <p class="main_intro_exp_1">기술과 사람으로</p>
+      <p>더나은 세상을 만드는</p>
+      <p>카카오입니다</p>
+    </div>
+    <div class="main_intro_1">
+      <p>대충 내용이 들어갈 부분</p>
     </div>
   </body>
 </html>

@@ -1,29 +1,59 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+.top-bar{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+.topMenu{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.topMenu ul{
+  margin: 0;
+  padding: 0;
+  display: inline;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.topMenu ul li{
+  margin: 0;
+  padding: 0;
+  line-height: 50px;
+  height: 50px;
+  display:inline-block;
+}
+.topMenu ul li a{
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  vertical-align: middle;
+  text-align: center;
+}
+.menuNav{
+  border-left: 1px solid black;
+  width:100px;
+}
+.comm{
+  border-right: 1px solid black;
+}
+.menuImage a img{
+  vertical-align: middle;
+  width: 117px;
+  height: 50px;
+}
+.menuImage a{
+  margin-right: 400px;
+  height: 30px;
+  line-height: 30px;
+}
 
 #login_click {
+  margin-left:400px;
   font-size: 20px;
   color: black;
   background-color: white;
@@ -37,10 +67,27 @@
   transition: 0.25s;
 }
 #profile {
+  margin-left:400px;
   font-size: 15px;
   color: black;
   background-color: white;
     border: none;
     cursor: pointer;
     border-radius:20px 20px 20px 20px;
+}
+
+.main_intro {
+  height: 1000px;
+  background-size: cover;
+}
+.main_intro p{
+  margin:0;
+  padding-left: 150px;
+  font-size: 50px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 10px black;
+}
+.main_intro_exp_1{
+  padding-top: 150px;
 }
