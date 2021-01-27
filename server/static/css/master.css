@@ -3,10 +3,10 @@ body{
 }
 .top-bar{
   overflow: hidden;
-  margin-top: 18px;
-  padding-left: 7%;
-  padding-bottom: 3px;
+  margin-top: 1px;
+  padding-bottom: 7px;
   border-bottom: 1px solid black;
+  text-align: center;
 }
 .topMenu ul{
   margin: 0px;
@@ -21,13 +21,14 @@ body{
   list-style: none;
   color: black;
   background-color: white;
-  float: left;
+  overflow:auto;
   line-height: 30px;
   vertical-align: center;
   text-align: center;
   border-left: 1px solid black;
   border-right: 1px solid black;
   display: inline;
+
 }
 .menuLink{
   text-decoration: none;
@@ -44,11 +45,9 @@ body{
 }
 .menuImage{
   margin-top: -2px;
-  margin-right: 24%;
   list-style: none;
   color: black;
   background-color: white;
-  float: left;
   line-height: 30px;
   vertical-align: center;
   text-align: center;
@@ -59,14 +58,13 @@ body{
   list-style: none;
   color: black;
   background-color: white;
-  float: left;
   line-height: 0px;
   vertical-align: center;
   text-align: center;
   display: inline;
   width: 170px;
   position: absolute;
-  left: 1250px;
+  center: 55%;
 }
 .menuLogin button{
   width: 200px;
@@ -111,7 +109,7 @@ body{
   transition: 0.25s;
 }
 #profile {
-  font-size: 20px;
+  font-size: 15px;
   color: black;
   background-color: white;
     border: none;
