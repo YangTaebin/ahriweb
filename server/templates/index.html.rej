@@ -1,0 +1,11 @@
+diff a/server/templates/index.html b/server/templates/index.html	(rejected hunks)
+@@ -15,6 +15,9 @@
+     </style>
+   </head>
+   <body>
++    <script type="text/javascript">
++      login_cont();
++    </script>
+     <div class="top-bar">
+       <nav class="topMenu">
+         <ul class="menu_ul">

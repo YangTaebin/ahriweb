@@ -1,9 +1,14 @@
 function login_cont() {
-  alert(document.cookie=="")
+  if(document.cookie != "") {
+    var id = getCookie("id");
+    var name = getCookie("name");
+    document.getElementById('login_click').innerText = String(name)+" 님";
+    document.getElementById('login_click').setAttribute('id','profile');
+    document.getElementById('profile').setAttribute('onclick','click_profile()');
+  }
 }
 
 function click_profile() {
-  alert(getCookie("id"));
   location.href="/profile";
 }
 function setCookie(name, value, exp) {
