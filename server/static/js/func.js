@@ -1,3 +1,7 @@
+function login_cont() {
+  alert(document.cookie=="")
+}
+
 function click_profile() {
   alert(getCookie("id"));
   location.href="/profile";
