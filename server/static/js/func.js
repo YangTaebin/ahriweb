@@ -1,4 +1,3 @@
-console.log(if(document.cookie));
 function click_profile() {
   alert(getCookie("id"));
   location.href="/profile";
@@ -23,4 +22,28 @@ function getCookie(cookie_name) {
 }
 var deleteCookie = function(name) {
   document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+}
+function menu_over_1(){
+  document.getElementById("yang").id = "sin";
+}
+function menu_out_1(){
+  document.getElementById("sin").id = "yang";
+}
+function menu_over_2(){
+  document.getElementById("tae").id = "sae";
+}
+function menu_out_2(){
+  document.getElementById("sae").id = "tae";
+}
+function menu_over_3(){
+  document.getElementById("bin").id = "ggi";
+}
+function menu_out_3(){
+  document.getElementById("ggi").id = "bin";
+}
+function menu_over_4(){
+  document.getElementById("byeong").id = "fuck";
+}
+function menu_out_4(){
+  document.getElementById("fuck").id = "byeong";
 }
