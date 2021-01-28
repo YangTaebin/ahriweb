@@ -1,6 +1,6 @@
 from flask import Flask, render_template,request
 import pymysql
-from sub_func import already_user
+from sub_func import already_user, id_to_univ_id
 
 app = Flask(__name__)
 
@@ -83,9 +83,15 @@ def log_res():
 
     return id
 
-@app.route('/profile')
+@app.route('/profile',methods=['POST'])
 def profile():
-    return render_template("profile.html")
+    id = request.form['id']
+    print(id)
+
+    univ_id = id_to_univ_id(id)
+    print(univ_id)
+
+    return render_template("profile.html", title="사용자 프로필", num = univ_id)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)
