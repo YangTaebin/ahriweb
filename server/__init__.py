@@ -83,5 +83,8 @@ def log_res():
 
     return id
 
+@app.route('/profile')
+def profile():
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)
