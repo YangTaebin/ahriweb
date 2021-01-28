@@ -8,13 +8,6 @@
     <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="{{ url_for('static',filename='js/func.js') }}"></script>
-    <script type="text/javascript">
-      function logout(){
-        deleteCookie("id");
-        deleteCookie("name");
-        location.href="/";
-      }
-    </script>
     <style>
       .main_intro{
         background-image: url("static/logo/아리아리.jpg");
@@ -37,7 +30,7 @@
           <li class="menuNav" id="bin" onmouseover="menu_over_3()" onmouseout="menu_out_3()">
             <a href="stock" class="menuLink" id="menu_sto">Stock</a>
           </li>
-          <li class="menuNav comm" id="byeong" onmouseover="menu_over_4()" onmouseout="menu_out_4()">
+          <li class="menuNav comm" id="park" onmouseover="menu_over_4()" onmouseout="menu_out_4()">
             <a href="community" class="menuLink" id="menu_com">Community</a>
           </li>
           <li class="menuLogin">
@@ -82,9 +75,26 @@
       </nav>
     </div>
 
-    <button type="button" name="button" onclick="logout()">로그아웃</button>
+    <button type="button" onclick="location.href='/writing'">글 쓰기</button>
 
-    <h1>당신의 유니버셜 아이디는 {{ num }} 입니다.<br>카카오톡 아리아리 봇을 사용하시려면 "등록 {{ num }}" 을 입력해 주세요.</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Content</th>
+          <th>writer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in content %}
+          <tr>
+            <td>{{ i["Num"] }}</td>
+            <td>{{ i["content"] }}</td>
+            <td>{{ i["writer"] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
     <script type="text/javascript">
       login_cont();
