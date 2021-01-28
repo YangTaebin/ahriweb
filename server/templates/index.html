@@ -8,6 +8,28 @@
     <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script type="text/javascript">
+      function click_profile() {
+        getCookie("id");
+        location.href="/profile";
+      }
+      function setCookie(name, value, exp) {
+        var data = new Date();
+        data.setTime(data.getTime() + exp*60*60*1000);
+        document.cookie = name + "=" + value + ";expires=" + data.toUTCString() + ";path=/";
+      }
+      function getCookie(cookie_name) {
+        var x, y;
+        var val = document.cookie.split(';');
+
+        for (var i = 0; i < val.length; i++) {
+          x = val[i].substr(0, val[i].indexOf('='));
+          y = val[i].substr(val[i].indexOf('=') + 1);
+          x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+          if (x == cookie_name) {
+            return unescape(y); // unescape로 디코딩 후 값 리턴
+          }
+        }
+      }
     </script>
     <style>
       .main_intro{
@@ -43,6 +65,7 @@
                 Kakao.Auth.login({
                   success:(auth)=>{
                     console.log("로그인 완료",auth)
+
                   },
                   fail:(err)=>{
                     console.error(err)
@@ -51,10 +74,13 @@
                 Kakao.API.request({
                   url: '/v2/user/me',
                   success: function(response) {
-                    console.log(response['id'])
+                    console.log(response);
+                    setCookie('id', response['id'], 3);
+                    setCookie('name', response['properties']['nickname'], 3);
+                    console.log("쿠키 설정 완료");
                     document.getElementById('login_click').innerText = String(response['properties']['nickname'])+" 님";
                     document.getElementById('login_click').setAttribute('id','profile');
-                    document.getElementById('profile').setAttribute('onclick','location.href="/profile"');
+                    document.getElementById('profile').setAttribute('onclick','click_profile()');
                     $.ajax({
                       type: 'POST',
                       url: "/log_res",
