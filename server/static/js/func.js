@@ -9,7 +9,11 @@ function login_cont() {
 }
 
 function click_profile() {
-  location.href="/profile";
+  var id = getCookie("id");
+  var name = getCookie("name");
+
+  document.write('<form action="/profile" id="smb_form" method="post"><input type="hidden" id="id" name="id" value="'+ id +'"></form>');
+  document.getElementById("smb_form").submit();
 }
 function setCookie(name, value, exp) {
   var data = new Date();

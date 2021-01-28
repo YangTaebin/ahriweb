@@ -3,35 +3,82 @@
   <head>
     <meta charset="utf-8">
     <title>{{ title }}</title>
+    <link rel="icon" href="{{ url_for('static',filename='logo/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static',filename='js/func.js') }}"></script>
+    <style>
+      .main_intro{
+        background-image: url("static/logo/아리아리.jpg");
+      }
+    </style>
   </head>
   <body>
     <div class="top-bar">
       <nav class="topMenu">
-        <ul>
+        <ul class="menu_ul">
           <li class="menuImage">
             <a href="/"><img src="{{ url_for('static', filename='logo/logo_word_black.png') }}" alt="AHRIAHRI" class="menuImg"></a>
           </li>
-          <li class="menuNav">
-            <a href="/us" class="menuLink">About US</a>
+          <li class="menuNav" id="yang" onmouseover="menu_over_1()" onmouseout="menu_out_1()">
+            <a href="us" class="menuLink" id="menu_us">About US</a>
           </li>
-          <li class="menuNav">
-            <a href="/proj" class="menuLink">Proj</a>
+          <li class="menuNav" id="tae" onmouseover="menu_over_2()" onmouseout="menu_out_2()">
+            <a href="proj" class="menuLink" id="menu_pro">Proj</a>
           </li>
-          <li class="menuNav">
-            <a href="/stock" class="menuLink">Stock</a>
+          <li class="menuNav" id="bin" onmouseover="menu_over_3()" onmouseout="menu_out_3()">
+            <a href="stock" class="menuLink" id="menu_sto">Stock</a>
           </li>
-          <li class="menuNav">
-            <a href="/community" class="menuLink">Community</a>
+          <li class="menuNav comm" id="byeong" onmouseover="menu_over_4()" onmouseout="menu_out_4()">
+            <a href="community" class="menuLink" id="menu_com">Community</a>
           </li>
           <li class="menuLogin">
-            <a href="/login" class="menuLink">LogIn</a>
+            <button type="button" id="login_click" name="button" onclick="login()">Kakao Login</button>
+            <script type="text/javascript">
+              function login() {
+                console.log("눌림");
+                Kakao.init('734a58ba8d1de6eb1485389492741493');
+                Kakao.Auth.login({
+                  success:(auth)=>{
+                    console.log("로그인 완료",auth)
+
+                  },
+                  fail:(err)=>{
+                    console.error(err)
+                  }
+                });
+                Kakao.API.request({
+                  url: '/v2/user/me',
+                  success: function(response) {
+                    console.log(response);
+                    setCookie('id', response['id'], 3);
+                    setCookie('name', response['properties']['nickname'], 3);
+                    console.log("쿠키 설정 완료");
+                    document.getElementById('login_click').innerText = String(response['properties']['nickname'])+" 님";
+                    document.getElementById('login_click').setAttribute('id','profile');
+                    document.getElementById('profile').setAttribute('onclick','click_profile()');
+                    $.ajax({
+                      type: 'POST',
+                      url: "/log_res",
+                      data: {"id": response['id']}
+                    });
+                  },
+                  fail: function(error) {
+                    console.log(error);
+                  }
+                });
+              };
+            </script>
           </li>
         </ul>
       </nav>
     </div>
-    <div class="ahristock">
-      <p style="font-size: 20px;">아리아리 주식 주가 : {{ ahristock }}</p>
-    </div>
+
+    <p style="font-size:50px;">현재 아리아리 주식의 주식 값은 {{ ahristock }} 입니다.</p>
+
+    <script type="text/javascript">
+      login_cont();
+    </script>
   </body>
 </html>
