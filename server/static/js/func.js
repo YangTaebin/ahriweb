@@ -33,26 +33,26 @@ var deleteCookie = function(name) {
   document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
 }
 function menu_over_1(){
-  document.getElementById("yang").id = "sin";
+  document.getElementById("yang").id = "seong";
 }
 function menu_out_1(){
-  document.getElementById("sin").id = "yang";
+  document.getElementById("seong").id = "yang";
 }
 function menu_over_2(){
-  document.getElementById("tae").id = "sae";
+  document.getElementById("tae").id = "hyeok";
 }
 function menu_out_2(){
-  document.getElementById("sae").id = "tae";
+  document.getElementById("hyeok").id = "tae";
 }
 function menu_over_3(){
-  document.getElementById("bin").id = "ggi";
+  document.getElementById("bin").id = "bao";
 }
 function menu_out_3(){
-  document.getElementById("ggi").id = "bin";
+  document.getElementById("bao").id = "bin";
 }
 function menu_over_4(){
-  document.getElementById("byeong").id = "fuck";
+  document.getElementById("park").id = "bo";
 }
 function menu_out_4(){
-  document.getElementById("fuck").id = "byeong";
+  document.getElementById("bo").id = "park";
 }
