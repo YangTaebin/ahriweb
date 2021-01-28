@@ -1,5 +1,6 @@
+console.log(if(document.cookie));
 function click_profile() {
-  getCookie("id");
+  alert(getCookie("id"));
   location.href="/profile";
 }
 function setCookie(name, value, exp) {
@@ -19,4 +20,7 @@ function getCookie(cookie_name) {
       return unescape(y); // unescape로 디코딩 후 값 리턴
     }
   }
+}
+var deleteCookie = function(name) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
 }
