@@ -49,14 +49,30 @@ function menu_out_2(){
   document.getElementById("hyeok").id = "tae";
 }
 function menu_over_3(){
-  document.getElementById("bin").id = "ba";
+  document.getElementById("bin").id = "bao";
 }
 function menu_out_3(){
-  document.getElementById("ba").id = "bin";
+  document.getElementById("bao").id = "bin";
 }
 function menu_over_4(){
   document.getElementById("park").id = "bo";
 }
 function menu_out_4(){
   document.getElementById("bo").id = "park";
+}
+
+function submit_writing(){
+  if(document.cookie==""){
+    alert("로그인을 해주세요.")
+    location.href="/"
+  }
+  var writing_form = document.getElementById("writing");
+  var name = document.createElement("input");
+  name.type="hidden";
+  console.log(getCookie("name"));
+  name.value=getCookie("name");
+  name.name="writer";
+  writing_form.appendChild(name);
+  writing_form.submit();
+  console.log("완료")
 }

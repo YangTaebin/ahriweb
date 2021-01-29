@@ -74,14 +74,12 @@
         </ul>
       </nav>
     </div>
-    <div class="main_intro">
-      <p class="main_intro_exp_1">기술과 사람으로</p>
-      <p>더 나은 세상을 만드는</p>
-      <p>아리아리입니다</p>
-    </div>
-    <div class="main_intro_1">
-      <p>대충 내용이 들어갈 부분</p>
-    </div>
+
+    <form id="writing" action="/submit_write" method="post">
+      <p style="height:100px;">내용 : <input style="width:100%; height:100%;" type="text" name="content" value="글 내용" onfocus="this.value=''"></p>
+      <button type="button" name="button" id="submit_writing_button" onclick="submit_writing()">제출</button>
+    </form>
+
     <script type="text/javascript">
       login_cont();
     </script>

@@ -1,6 +1,8 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,redirect
 import pymysql
-from sub_func import already_user, id_to_univ_id
+from sub_func import already_user, id_to_univ_id, already_univ
+import string
+import random
 
 app = Flask(__name__)
 
@@ -72,10 +74,19 @@ def log_res():
     ahriweb_user_cursor.execute(sql)
     ahriweb_user_result = ahriweb_user_cursor.fetchall()
     print(ahriweb_user_result)
-    user_num = len(ahriweb_user_result)
+    n = len(ahriweb_user_result)
 
     if not already_user(id):
-        sql = "insert into `user` (kakao_login_id,univ_id) values ("+id+","+str(user_num+1)+");"
+        univ = ""
+        while 1:
+            for i in range(6):
+                univ += random.choice(string.ascii_lowercase)
+                print(univ)
+            if not already_univ(univ):
+                break
+            univ = ""
+        sql = "insert into `user` (kakao_login_id,univ_id) values ("+id+",'"+univ+"');"
+        print(sql)
         ahriweb_user_cursor.execute(sql)
         ahriweb_user.commit()
 
@@ -92,6 +103,51 @@ def profile():
     print(univ_id)
 
     return render_template("profile.html", title="사용자 프로필", num = univ_id)
+
+@app.route('/community')
+def community():
+    commun = pymysql.connect(
+        user="root",
+        passwd="taebin0408!",
+        db="community",
+        host="localhost"
+    )
+    commun_cursor = commun.cursor(pymysql.cursors.DictCursor)
+
+    sql="SELECT * FROM `content`;"
+    commun_cursor.execute(sql)
+    commun_result = commun_cursor.fetchall()
+    return render_template("community.html", title="커뮤니티",content=reversed(commun_result))
+
+@app.route('/writing')
+def writing():
+    return render_template("writing.html",title="글쓰기")
+
+@app.route('/submit_write',methods=['POST'])
+def sub_write():
+    writer = request.form['writer']
+    content = request.form['content']
+    print(writer, content)
+
+    commun = pymysql.connect(
+        user="root",
+        passwd="taebin0408!",
+        db="community",
+        host="localhost"
+    )
+    commun_cursor = commun.cursor(pymysql.cursors.DictCursor)
+
+    sql="SELECT * FROM `content`;"
+    commun_cursor.execute(sql)
+    commun_result = commun_cursor.fetchall()
+    print(commun_result)
+    n = len(commun_result)
+
+    sql = "insert into content (Num, content, writer) values ("+str(n+1)+",'"+str(content)+"','"+writer+"');"
+    commun_cursor.execute(sql)
+    commun.commit()
+
+    return redirect("/community")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)
