@@ -93,6 +93,15 @@ body{
 .main_intro_exp_1{
   padding-top: 150px;
 }
-#yang {
-  
+#seong:hover #menu_us {
+  color: blue;
+}
+#hyeok:hover #menu_pro {
+  color: blue;
+}
+#ba:hover #menu_sto {
+  color: blue;
+}
+#bo:hover #menu_com {
+  color: blue;
 }

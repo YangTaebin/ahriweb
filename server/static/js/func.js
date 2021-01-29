@@ -49,10 +49,10 @@ function menu_out_2(){
   document.getElementById("hyeok").id = "tae";
 }
 function menu_over_3(){
-  document.getElementById("bin").id = "bao";
+  document.getElementById("bin").id = "ba";
 }
 function menu_out_3(){
-  document.getElementById("bao").id = "bin";
+  document.getElementById("ba").id = "bin";
 }
 function menu_over_4(){
   document.getElementById("park").id = "bo";
