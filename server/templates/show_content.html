@@ -75,26 +75,10 @@
       </nav>
     </div>
 
-    <button type="button" onclick="location.href='/writing'">글 쓰기</button>
-
-    <table>
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Content</th>
-          <th>writer</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for i in content %}
-          <tr>
-            <td class='{{ i["Num"] }}'>{{ i["Num"] }}</td>
-            <td><button type="button" onClick='show_content(String({{ i["Num"] }}));'>{{ i["content"][:6] }}</button></td>
-            <td>{{ i["writer"] }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    content : {{ content }}
+    <br>
+    <br>
+    writer : {{ writer }}
 
     <script type="text/javascript">
       login_cont();

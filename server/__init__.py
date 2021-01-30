@@ -68,7 +68,14 @@ def log_res():
         db="ahriweb_user",
         host="localhost"
     )
+    ahri_system = pymysql.connect(
+        user="root",
+        passwd="taebin0408!",
+        db="ahri_system",
+        host="localhost"
+    )
     ahriweb_user_cursor = ahriweb_user.cursor(pymysql.cursors.DictCursor)
+    ahri_system_cursor = ahri_system.cursor(pymysql.cursors.DictCursor)
 
     sql="SELECT * FROM `user`;"
     ahriweb_user_cursor.execute(sql)
@@ -86,9 +93,12 @@ def log_res():
                 break
             univ = ""
         sql = "insert into `user` (kakao_login_id,univ_id) values ("+id+",'"+univ+"');"
-        print(sql)
+        sql_sys = "insert into `sys_user` (univ_id,is_les) values ('"+univ+"',0);"
+        print(sql_sys)
         ahriweb_user_cursor.execute(sql)
+        ahri_system_cursor.execute(sql_sys)
         ahriweb_user.commit()
+        ahri_system.commit()
 
     else: print("이미 등록 완료")
 
@@ -102,7 +112,32 @@ def profile():
     univ_id = id_to_univ_id(id)
     print(univ_id)
 
-    return render_template("profile.html", title="사용자 프로필", num = univ_id)
+    ahri_system = pymysql.connect(
+        user="root",
+        passwd="taebin0408!",
+        db="ahri_system",
+        host="localhost"
+    )
+    ahri_system_cursor = ahri_system.cursor(pymysql.cursors.DictCursor)
+
+    sql = "select * from sys_user;"
+    ahri_system_cursor.execute(sql)
+    ahri_system_result = ahri_system_cursor.fetchall()
+    for i in ahri_system_result:
+        if i["univ_id"] == univ_id:
+            lesisted = i["is_les"]
+    if str(lesisted) == "0":
+        return render_template("profile.html", title="사용자 프로필", num = univ_id, is_le=str(lesisted))
+    if str(lesisted) == "1":
+        balance = pymysql.connect(user="root",passwd="taebin0408!",db="balance",host="localhost")
+        balance_cursor = balance.cursor(pymysql.cursors.DictCursor)
+        sql = "select * from balance_user;"
+        balance_cursor.execute(sql)
+        balance_result = balance_cursor.fetchall()
+        for i in balance_result:
+            if i["univ_id"]==univ_id:
+                balance_money = i["balance"]
+        return render_template("profile.html", title="사용자 프로필", num = univ_id, is_le=str(lesisted), balance=balance_money)
 
 @app.route('/community')
 def community():
@@ -148,6 +183,50 @@ def sub_write():
     commun.commit()
 
     return redirect("/community")
+
+@app.route('/show_content')
+def show_content():
+    Num = request.args.get('N',"0")
+
+    commun = pymysql.connect(
+        user="root",
+        passwd="taebin0408!",
+        db="community",
+        host="localhost"
+    )
+    commun_cursor = commun.cursor(pymysql.cursors.DictCursor)
+
+    sql="SELECT * FROM `content`;"
+    commun_cursor.execute(sql)
+    commun_result = commun_cursor.fetchall()
+
+    return render_template("show_content.html",title="커뮤니티",writer=commun_result[int(Num)-1]["writer"],content=commun_result[int(Num)-1]["content"])
+
+@app.route("/les_sys",methods=["POST"])
+def les_sys():
+    id = request.form["id"]
+    print(id)
+
+    univ_id = id_to_univ_id(id)
+
+    ahri_system = pymysql.connect(
+        user="root",
+        passwd="taebin0408!",
+        db="ahri_system",
+        host="localhost"
+    )
+    balance = pymysql.connect(user="root",passwd="taebin0408!",db="balance",host="localhost")
+    balance_cursor = balance.cursor(pymysql.cursors.DictCursor)
+    ahri_system_cursor = ahri_system.cursor(pymysql.cursors.DictCursor)
+
+    sql="update sys_user set is_les=1 where univ_id='"+univ_id+"';"
+    sql_balance = "insert into balance_user (univ_id,balance) values ('"+univ_id+"',100000);"
+    ahri_system_cursor.execute(sql)
+    balance_cursor.execute(sql_balance)
+    ahri_system.commit()
+    balance.commit()
+
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)
