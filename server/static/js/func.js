@@ -76,3 +76,33 @@ function submit_writing(){
   writing_form.submit();
   console.log("완료")
 }
+
+function show_content(num){
+  console.log(typeof(num));
+  var show_content = document.createElement("form");
+  show_content.method="GET";
+  show_content.action="/show_content";
+  show_content.id="show_content";
+  var n = document.createElement("input");
+  n.type="hidden";
+  n.value = String(num);
+  n.name = "N";
+  show_content.appendChild(n);
+  document.body.appendChild(show_content);
+  show_content.submit();
+}
+function regis_sys(){
+  id = getCookie("id");
+
+  var les_sys = document.createElement("form");
+  les_sys.method="POST";
+  les_sys.action="/les_sys";
+  les_sys.id="les_sys";
+  var id_input = document.createElement("input");
+  id_input.type="hidden";
+  id_input.value = String(id);
+  id_input.name = "id";
+  les_sys.appendChild(id_input);
+  document.body.appendChild(les_sys);
+  les_sys.submit();
+}
