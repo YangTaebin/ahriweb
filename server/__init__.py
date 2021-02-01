@@ -74,8 +74,10 @@ def log_res():
         db="ahri_system",
         host="localhost"
     )
+    sys_kakao = pymysql.connect(user="root",passwd="taebin0408!",db="les_kakao",host="localhost")
     ahriweb_user_cursor = ahriweb_user.cursor(pymysql.cursors.DictCursor)
     ahri_system_cursor = ahri_system.cursor(pymysql.cursors.DictCursor)
+    sys_kakao_cursor = sys_kakao.cursor(pymysql.cursors.DictCursor)
 
     sql="SELECT * FROM `user`;"
     ahriweb_user_cursor.execute(sql)
