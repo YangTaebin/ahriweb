@@ -106,3 +106,16 @@ function regis_sys(){
   document.body.appendChild(les_sys);
   les_sys.submit();
 }
+function quit(){
+  id = getCookie("id");
+  var les_sys = document.createElement("form");
+  les_sys.method="POST";
+  les_sys.action="/quit";
+  var id_input = document.createElement("input");
+  id_input.type="hidden";
+  id_input.value = String(id);
+  id_input.name = "id";
+  les_sys.appendChild(id_input);
+  document.body.appendChild(les_sys);
+  les_sys.submit();
+}

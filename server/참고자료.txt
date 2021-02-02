@@ -1,0 +1,16 @@
+ahri_system - 시스템을 이용 중인지(profile) - sys_user
+ahristock - 아리아리 주식의 보유 갯수 - ahristock
+ahriweb - 아리아리 주식의 주식 값 - ahristock
+ahriweb_user - 웹 사이트를 로그인 - user
+balance - 잔액 - balance_user
+community - 대화 내용 - content
+les_kakao - 카카오톡 로그인 여부 - is_les
+
+초기화시 해야할 것
+ahriweb 제외하고 모든 내용 삭제
+
+시스템 사용 초기화시
+ahri_system
+ahristock
+balance
+les_kakao

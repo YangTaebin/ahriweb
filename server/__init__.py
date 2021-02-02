@@ -1,6 +1,6 @@
 from flask import Flask, render_template,request,redirect
 import pymysql
-from sub_func import already_user, id_to_univ_id, already_univ
+from sub_func import already_user, id_to_univ_id, already_univ, set_ahristock,quit_sys
 import string
 import random
 
@@ -228,6 +228,15 @@ def les_sys():
     ahri_system.commit()
     balance.commit()
 
+    set_ahristock(univ_id)
+
+    return redirect("/")
+
+@app.route("/quit",methods=["POST"])
+def quit():
+    id = request.form["id"]
+    univ_id = id_to_univ_id(id)
+    quit_sys(univ_id)
     return redirect("/")
 
 if __name__ == "__main__":
