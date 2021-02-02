@@ -65,6 +65,7 @@ function submit_writing(){
   if(document.cookie==""){
     alert("로그인을 해주세요.")
     location.href="/"
+    return 0
   }
   var writing_form = document.getElementById("writing");
   var name = document.createElement("input");
