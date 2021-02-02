@@ -15,6 +15,19 @@
     </style>
   </head>
   <body>
+    <script type="text/javascript">
+      var key = [];
+      window.onkeydown = function(e){
+        key.push(e["key"]);
+        if(key.length>6){
+          key = [];
+        }
+        if(key.toString() == "t,e,t,r,i,s"){
+          location.href="/tetris";
+        }
+        console.log(key.toString());
+      };
+    </script>
     <div class="top-bar">
       <nav class="topMenu">
         <ul class="menu_ul">
