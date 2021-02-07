@@ -2,44 +2,14 @@
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>{{ title }}</title>
+    <title></title>
     <link rel="icon" href="{{ url_for('static',filename='logo/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
     <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="{{ url_for('static',filename='js/func.js') }}"></script>
-    <style>
-      .main_intro{
-        background-image: url("static/logo/아리아리.jpg");
-      }
-    </style>
   </head>
   <body>
-    <script type="text/javascript">
-      var key = [];
-      window.onkeydown = function(e){
-        key.push(e["key"]);
-        if(key.length>10){
-          key = [];
-        }
-        if(key.toString() == "t,e,t,r,i,s"){
-          location.href="/tetris";
-        }
-        if(key.toString() == "a,h,r,i"){
-          location.href="/ahri";
-        }
-        if(key.toString() == "g,o,o,g,l,e"){
-          location.href="https://www.google.com";
-        }
-        if(key.toString() == "n,a,v,e,r"){
-          location.href="https://www.naver.com";
-        }
-        if(key.toString() == "ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a"){
-          location.href="https://www.naver.com";
-        }
-        console.log(key.toString());
-      };
-    </script>
     <div class="top-bar">
       <nav class="topMenu">
         <ul class="menu_ul">
@@ -99,16 +69,7 @@
         </ul>
       </nav>
     </div>
-    <div class="main_intro">
-      <p class="main_intro_exp_1">기술과 사람으로</p>
-      <p>더 나은 세상을 만드는</p>
-      <p>아리아리입니다</p>
-    </div>
-    <div class="main_intro_1">
-      <p>대충 내용이 들어갈 부분</p>
-    </div>
-    <script type="text/javascript">
-      login_cont();
-    </script>
+
+
   </body>
 </html>

@@ -243,5 +243,9 @@ def quit():
 def tetris():
     return render_template("tetris.html")
 
+@app.route("/ahri")
+def ahriahri():
+    return render_template("ahriahri.html",title="")
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=80)
