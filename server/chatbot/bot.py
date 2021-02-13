@@ -6,6 +6,12 @@ app = Flask(__name__)
 
 @app.route('/',methods=['POST'])
 def chat():
+    tick = pymysql.connect(host="localhost",passwd="taebin0408!",user="root",db="tick")
+    tick_cursor = tick.cursor(pymysql.cursors.DictCursor)
+    sql="select * from tick;"
+    tick_cursor.execute(sql)
+    tick_result = str(tick_cursor.fetchall()[0]['TICK'])
+
     temp = request.get_json()
     user_id = temp["userRequest"]["user"]["id"]
     resp = {
@@ -64,6 +70,9 @@ def chat():
         resp['template']['outputs'][0]['simpleText']['text']="닉네임: "+str(univ_id)+"\n잔액: "+str(balance)+"\n아리아리 주식수: "+str(ahristock)
 
     if msg=="매수":
+        if tick_result == "0":
+            resp["template"]["outputs"][0]["simpleText"]["text"] = "현재 거래 시간이 아닙니다."
+            return jsonify(resp)
         buy_type = temp["action"]["params"]["type"]
         buy_amount = temp["action"]["params"]["amount"]
         stock_type_dict={"아리아리":"ahristock"}
@@ -89,6 +98,9 @@ def chat():
         resp["template"]["outputs"][0]["simpleText"]["text"] = str(buy_type)+" 주식을 "+str(buy_amount)+"개 구입했습니다."
 
     if msg=="매도":
+        if tick_result == "0":
+            resp["template"]["outputs"][0]["simpleText"]["text"] = "현재 거래 시간이 아닙니다."
+            return jsonify(resp)
         buy_type = temp["action"]["params"]["type"]
         buy_amount = temp["action"]["params"]["amount"]
         stock_type_dict={"아리아리":"ahristock"}

@@ -121,3 +121,7 @@ def sys_used(univ_id):
                 return True
             else:
                 return False
+
+
+def new_balance_ahri():
+    
