@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 import pymysql
-from sub_func import is_univ_id, is_sys_kakao,kakao_to_univ,money_balance,ahristock_amount,test_pattern_buy,change_stock,change_balance,ahristock_bal,center_hav,change_center,already_used_univ,sys_used
+from sub_func import is_univ_id, is_sys_kakao,kakao_to_univ,money_balance,ahristock_amount,test_pattern_buy,change_stock,change_balance,ahristock_bal,center_hav,change_center,already_used_univ,sys_used,add_tick_buy,add_tick_sell
 
 app = Flask(__name__)
 
@@ -27,6 +27,7 @@ def chat():
         }
     }
     msg = str(temp['userRequest']['utterance'])
+    print(msg)
 
     sys_kakao = pymysql.connect(host="localhost",passwd="taebin0408!",user="root",db="les_kakao")
     sys_kakao_cursor = sys_kakao.cursor(pymysql.cursors.DictCursor)
@@ -57,8 +58,15 @@ def chat():
     univ_id = kakao_to_univ(user_id)
     balance = money_balance(univ_id)
     ahristock = ahristock_amount(univ_id)
-    stock_bal = {"아리아리":ahristock_bal()}
-    center_have = int(center_hav())
+    stock_bal = ahristock_bal()
+    center_have = center_hav()
+
+    if msg == "주가":
+        stock_type=["아리아리","주식1"]
+        res = "총 주가"
+        for i in stock_type:
+            res += "\n"+str(i)+": "+str(stock_bal[i])
+        resp['template']['outputs'][0]['simpleText']['text'] = res
 
     if msg == "계정 연결 해제":
         sql = "delete from is_les where kakao_id='"+user_id+"';"
@@ -67,7 +75,7 @@ def chat():
         resp['template']['outputs'][0]['simpleText']['text']="계정 연결이 해제되었습니다."
 
     if msg == "계정 정보":
-        resp['template']['outputs'][0]['simpleText']['text']="닉네임: "+str(univ_id)+"\n잔액: "+str(balance)+"\n아리아리 주식수: "+str(ahristock)
+        resp['template']['outputs'][0]['simpleText']['text']="닉네임: "+str(univ_id)+"\n잔액: "+str(balance)+"\n아리아리 주식수: "+str(ahristock["아리아리"])+"\n주식1 주식수: "+str(ahristock["주식1"])
 
     if msg=="매수":
         if tick_result == "0":
@@ -75,10 +83,10 @@ def chat():
             return jsonify(resp)
         buy_type = temp["action"]["params"]["type"]
         buy_amount = temp["action"]["params"]["amount"]
-        stock_type_dict={"아리아리":"ahristock"}
+        stock_type_dict={"아리아리":"ahristock","주식1":"stocka"}
         print(buy_type,buy_amount)
         if test_pattern_buy(buy_type,buy_amount)==1:
-            resp["template"]["outputs"][0]["simpleText"]["text"] = "주식 목록\n(아리아리)\n에 해당하지 않는 목록입니다."
+            resp["template"]["outputs"][0]["simpleText"]["text"] = "주식 목록\n(아리아리, 주식1)\n에 해당하지 않는 목록입니다."
             return jsonify(resp)
         if test_pattern_buy(buy_type,buy_amount)==2:
             resp["template"]["outputs"][0]["simpleText"]["text"] = "갯수를 (1개) 의 형식으로 입력해주세요."
@@ -87,12 +95,13 @@ def chat():
         if int(balance)-(int(stock_bal[buy_type])*buy_amount) < 0:
             resp["template"]["outputs"][0]["simpleText"]["text"] = "잔액이 모자랍니다."
             return jsonify(resp)
-        if (int(center_have) - int(buy_amount))<0:
+        if (int(center_have[buy_type]) - int(buy_amount))<0:
             resp["template"]["outputs"][0]["simpleText"]["text"] = "죄송합니다. 주식이 더 이상 남아있지 않습니다."
             return jsonify(resp)
-        change_center(center_have-buy_amount)
-        change_stock(univ_id, stock_type_dict[buy_type],int(ahristock)+int(buy_amount))
+        change_center(stock_type_dict[buy_type], center_have[buy_type]-buy_amount)
+        change_stock(univ_id, stock_type_dict[buy_type], int(ahristock[buy_type])+int(buy_amount))
         change_balance(univ_id, int(balance)-(int(stock_bal[buy_type])*buy_amount))
+        add_tick_buy(stock_type_dict[buy_type], buy_amount)
 
 
         resp["template"]["outputs"][0]["simpleText"]["text"] = str(buy_type)+" 주식을 "+str(buy_amount)+"개 구입했습니다."
@@ -103,21 +112,22 @@ def chat():
             return jsonify(resp)
         buy_type = temp["action"]["params"]["type"]
         buy_amount = temp["action"]["params"]["amount"]
-        stock_type_dict={"아리아리":"ahristock"}
+        stock_type_dict={"아리아리":"ahristock","주식1":"stocka"}
         print(buy_type,buy_amount)
         if test_pattern_buy(buy_type,buy_amount)==1:
-            resp["template"]["outputs"][0]["simpleText"]["text"] = "주식 목록\n(아리아리)\n에 해당하지 않는 목록입니다."
+            resp["template"]["outputs"][0]["simpleText"]["text"] = "주식 목록\n(아리아리, 주식1)\n에 해당하지 않는 목록입니다."
             return jsonify(resp)
         if test_pattern_buy(buy_type,buy_amount)==2:
             resp["template"]["outputs"][0]["simpleText"]["text"] = "갯수를 (1개) 의 형식으로 입력해주세요."
             return jsonify(resp)
         buy_amount = int(buy_amount[:-1])
-        if ahristock-buy_amount < 0:
+        if ahristock[buy_type]-buy_amount < 0:
             resp["template"]["outputs"][0]["simpleText"]["text"] = "판매할 주식이 모자랍니다."
             return jsonify(resp)
-        change_center(center_have+buy_amount)
-        change_stock(univ_id, stock_type_dict[buy_type],int(ahristock)-int(buy_amount))
-        change_balance(univ_id, int(balance)+(int(stock_bal[buy_type])*buy_amount))
+        change_center(stock_type_dict[buy_type], center_have[buy_type]+buy_amount)
+        change_stock(univ_id, stock_type_dict[buy_type],int(ahristock[buy_type])-int(buy_amount))
+        change_balance(univ_id, int(balance)+((int(stock_bal[buy_type])*buy_amount)*0.997))
+        add_tick_sell(stock_type_dict[buy_type], buy_amount)
 
 
         resp["template"]["outputs"][0]["simpleText"]["text"] = str(buy_type)+" 주식을 "+str(buy_amount)+"개 판매했습니다."

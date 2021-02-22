@@ -1,6 +1,6 @@
 from flask import Flask, render_template,request,redirect
 import pymysql
-from sub_func import already_user, id_to_univ_id, already_univ, set_ahristock,quit_sys
+from sub_func import already_user, id_to_univ_id, already_univ, set_ahristock,quit_sys, set_stocka
 import string
 import random
 
@@ -229,15 +229,18 @@ def les_sys():
     balance.commit()
 
     set_ahristock(univ_id)
+    set_stocka(univ_id)
 
     return redirect("/")
 
+'''
 @app.route("/quit",methods=["POST"])
 def quit():
     id = request.form["id"]
     univ_id = id_to_univ_id(id)
     quit_sys(univ_id)
     return redirect("/")
+'''
 
 @app.route("/tetris")
 def tetris():

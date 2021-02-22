@@ -1,0 +1,23 @@
+주식 추가 시 추가해야하는 거
+stocka - 주식1 주식수
+stock_bal - 주식 이름과 그 주식의 주식 값을 구할 수 있는 sub_func
+center_have - 중앙에서 몇개의 주식을 가지고 있는지
+매수
+stock_type_dict에 주식별로 사용할 영문자 이름 입력
+sub_func.py에서 test_pattern_buy에서 stock_list에 추가
+change_center sub_func에서 수정 바람
+매도
+stock_type_dict에 추가
+
+
+__init__.py에서
+les_sys 항목에서
+set_ahristock(univ_id) 부분 각 주식별로 추가 (유저별로 가지고 있는 주식 수)
+
+quit_sys에서 각 주식 항목 추가
+
+데이터베이스 추가할 항목
+stocka - stocka - 주식의 보유 갯수
+center - stocka - 중앙에 있는 주식의 수
+tick_buy - stocka
+tick_sell - stocka
