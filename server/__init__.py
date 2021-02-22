@@ -233,14 +233,14 @@ def les_sys():
 
     return redirect("/")
 
-'''
+
 @app.route("/quit",methods=["POST"])
 def quit():
     id = request.form["id"]
     univ_id = id_to_univ_id(id)
     quit_sys(univ_id)
     return redirect("/")
-'''
+
 
 @app.route("/tetris")
 def tetris():

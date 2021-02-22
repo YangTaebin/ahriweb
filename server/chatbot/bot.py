@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/',methods=['POST'])
 def chat():
-    tick = pymysql.connect(host="localhost",passwd="taebin0408!",user="root",db="tick")
+    tick = pymysql.connect(host="172.30.2.209",passwd="taebin0408!",user="ahri",db="tick")
     tick_cursor = tick.cursor(pymysql.cursors.DictCursor)
     sql="select * from tick;"
     tick_cursor.execute(sql)
@@ -29,7 +29,7 @@ def chat():
     msg = str(temp['userRequest']['utterance'])
     print(msg)
 
-    sys_kakao = pymysql.connect(host="localhost",passwd="taebin0408!",user="root",db="les_kakao")
+    sys_kakao = pymysql.connect(host="172.30.2.209",passwd="taebin0408!",user="ahri",db="les_kakao")
     sys_kakao_cursor = sys_kakao.cursor(pymysql.cursors.DictCursor)
 
     if msg == "등록":
