@@ -14,13 +14,26 @@ def chat():
 
     temp = request.get_json()
     user_id = temp["userRequest"]["user"]["id"]
+    print(temp)
     resp = {
         "version":"2.0",
         "template":{
             "outputs":[
                 {
                     "simpleText":{
-                        "text":"Responce"
+                        "text":""
+                    }
+                }
+            ]
+        }
+    }
+    resp_image = {
+        "version":"2.0",
+        "template":{
+            "outputs":[
+                {
+                    "simpleImage":{
+                        "imageUrl":""
                     }
                 }
             ]
@@ -31,6 +44,10 @@ def chat():
 
     sys_kakao = pymysql.connect(host="172.30.2.209",passwd="taebin0408!",user="ahri",db="les_kakao")
     sys_kakao_cursor = sys_kakao.cursor(pymysql.cursors.DictCursor)
+
+    if msg == "사진":
+        resp_image["template"]["outputs"][0]["simpleImage"]["imageUrl"]="http://bf191e72268d.ngrok.io/static/res.jpg"
+        return jsonify(resp_image)
 
     if msg == "등록":
         if is_sys_kakao(user_id):

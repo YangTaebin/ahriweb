@@ -1,7 +1,7 @@
 import schedule
 import time
 import pymysql
-from sub_func import ahristock_bal, new_balance_ahri, clear_tick
+from sub_func import ahristock_bal, new_balance_ahri, clear_tick, chart_set
 
 def tick_open():
     tick = pymysql.connect(host="localhost",passwd="taebin0408!",user="root",db="tick")
@@ -31,9 +31,11 @@ def tick_close():
     tick.commit()
     new_balance_ahri()
     clear_tick()
+    chart_set()
 
-tick_close()
+
 tick_open()
+tick_close()
 #schedule.every().day.at("").do(tick_open)
 
 #while True:
