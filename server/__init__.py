@@ -13,9 +13,9 @@ def main():
 @app.route('/stock')
 def stock():
     ahristock = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
-        host="localhost",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
+        host="172.20.0.139",
         db="ahriweb"
     )
     ahristock_cursor = ahristock.cursor(pymysql.cursors.DictCursor)
@@ -39,10 +39,10 @@ def changing_p():
     value = request.form['value']
     if jong=="ahri":
         ahristock=pymysql.connect(
-            user="root",
-            passwd="taebin0408!",
+            user="ahri",
+            passwd="@dkfldkfl2021@",
             db="ahriweb",
-            host="localhost"
+            host="172.20.0.139"
         )
         ahristock_cursor = ahristock.cursor(pymysql.cursors.DictCursor)
 
@@ -63,18 +63,18 @@ def log_res():
     print(id)
 
     ahriweb_user = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="ahriweb_user",
-        host="localhost"
+        host="172.20.0.139"
     )
     ahri_system = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="ahri_system",
-        host="localhost"
+        host="172.20.0.139"
     )
-    sys_kakao = pymysql.connect(user="root",passwd="taebin0408!",db="les_kakao",host="localhost")
+    sys_kakao = pymysql.connect(user="ahri",passwd="@dkfldkfl2021@",db="les_kakao",host="172.20.0.139")
     ahriweb_user_cursor = ahriweb_user.cursor(pymysql.cursors.DictCursor)
     ahri_system_cursor = ahri_system.cursor(pymysql.cursors.DictCursor)
     sys_kakao_cursor = sys_kakao.cursor(pymysql.cursors.DictCursor)
@@ -115,10 +115,10 @@ def profile():
     print(univ_id)
 
     ahri_system = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="ahri_system",
-        host="localhost"
+        host="172.20.0.139"
     )
     ahri_system_cursor = ahri_system.cursor(pymysql.cursors.DictCursor)
 
@@ -131,7 +131,7 @@ def profile():
     if str(lesisted) == "0":
         return render_template("profile.html", title="사용자 프로필", num = univ_id, is_le=str(lesisted))
     if str(lesisted) == "1":
-        balance = pymysql.connect(user="root",passwd="taebin0408!",db="balance",host="localhost")
+        balance = pymysql.connect(user="ahri",passwd="@dkfldkfl2021@",db="balance",host="172.20.0.139")
         balance_cursor = balance.cursor(pymysql.cursors.DictCursor)
         sql = "select * from balance_user;"
         balance_cursor.execute(sql)
@@ -144,10 +144,10 @@ def profile():
 @app.route('/community')
 def community():
     commun = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="community",
-        host="localhost"
+        host="172.20.0.139"
     )
     commun_cursor = commun.cursor(pymysql.cursors.DictCursor)
 
@@ -167,10 +167,10 @@ def sub_write():
     print(writer, content)
 
     commun = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="community",
-        host="localhost"
+        host="172.20.0.139"
     )
     commun_cursor = commun.cursor(pymysql.cursors.DictCursor)
 
@@ -191,10 +191,10 @@ def show_content():
     Num = request.args.get('N',"0")
 
     commun = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="community",
-        host="localhost"
+        host="172.20.0.139"
     )
     commun_cursor = commun.cursor(pymysql.cursors.DictCursor)
 
@@ -212,12 +212,12 @@ def les_sys():
     univ_id = id_to_univ_id(id)
 
     ahri_system = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="ahri_system",
-        host="localhost"
+        host="172.20.0.139"
     )
-    balance = pymysql.connect(user="root",passwd="taebin0408!",db="balance",host="localhost")
+    balance = pymysql.connect(user="ahri",passwd="@dkfldkfl2021@",db="balance",host="172.20.0.139")
     balance_cursor = balance.cursor(pymysql.cursors.DictCursor)
     ahri_system_cursor = ahri_system.cursor(pymysql.cursors.DictCursor)
 

@@ -2,10 +2,10 @@ import pymysql
 
 def already_user(id):
     user = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="ahriweb_user",
-        host="localhost"
+        host="172.20.0.139"
     )
 
     user_cursor = user.cursor(pymysql.cursors.DictCursor)
@@ -21,10 +21,10 @@ def already_user(id):
 
 def id_to_univ_id(id):
     user = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="ahriweb_user",
-        host="localhost"
+        host="172.20.0.139"
     )
 
     user_cursor = user.cursor(pymysql.cursors.DictCursor)
@@ -40,10 +40,10 @@ def id_to_univ_id(id):
 
 def already_univ(univ_id):
     user = pymysql.connect(
-        user="root",
-        passwd="taebin0408!",
+        user="ahri",
+        passwd="@dkfldkfl2021@",
         db="ahriweb_user",
-        host="localhost"
+        host="172.20.0.139"
     )
 
     user_cursor = user.cursor(pymysql.cursors.DictCursor)
@@ -58,25 +58,25 @@ def already_univ(univ_id):
     return False
 
 def set_ahristock(univ_id):
-    ahristock = pymysql.connect(host="localhost",user="root",passwd="taebin0408!",db="ahristock")
+    ahristock = pymysql.connect(host="172.20.0.139",user="ahri",passwd="@dkfldkfl2021@",db="ahristock")
     ahristock_cursor = ahristock.cursor(pymysql.cursors.DictCursor)
     sql="insert into ahristock (univ_id,amount) values ('"+univ_id+"',0);"
     ahristock_cursor.execute(sql)
     ahristock.commit()
 
 def set_stocka(univ_id):
-    stock = pymysql.connect(host="localhost",user="root",passwd="taebin0408!",db="stocka")
+    stock = pymysql.connect(host="172.20.0.139",user="ahri",passwd="@dkfldkfl2021@",db="stocka")
     stock_cursor = stock.cursor(pymysql.cursors.DictCursor)
     sql="insert into stocka (univ_id,amount) values ('"+univ_id+"',0);"
     stock_cursor.execute(sql)
     stock.commit()
 
 def quit_sys(univ_id):
-    ahri_sys = pymysql.connect(host="localhost",user="root",passwd="taebin0408!",db="ahri_system")
-    ahristock = pymysql.connect(host="localhost",user="root",passwd="taebin0408!",db="ahristock")
-    stocka = pymysql.connect(host="localhost",user="root",passwd="taebin0408!",db="stocka")
-    balance = pymysql.connect(host="localhost",user="root",passwd="taebin0408!",db="balance")
-    les_kakao = pymysql.connect(host="localhost",user="root",passwd="taebin0408!",db="les_kakao")
+    ahri_sys = pymysql.connect(host="172.20.0.139",user="ahri",passwd="@dkfldkfl2021@",db="ahri_system")
+    ahristock = pymysql.connect(host="172.20.0.139",user="ahri",passwd="@dkfldkfl2021@",db="ahristock")
+    stocka = pymysql.connect(host="172.20.0.139",user="ahri",passwd="@dkfldkfl2021@",db="stocka")
+    balance = pymysql.connect(host="172.20.0.139",user="ahri",passwd="@dkfldkfl2021@",db="balance")
+    les_kakao = pymysql.connect(host="172.20.0.139",user="ahri",passwd="@dkfldkfl2021@",db="les_kakao")
     ahri_sys_cursor = ahri_sys.cursor(pymysql.cursors.DictCursor)
     ahristock_cursor = ahristock.cursor(pymysql.cursors.DictCursor)
     stocka_cursor = stocka.cursor(pymysql.cursors.DictCursor)
